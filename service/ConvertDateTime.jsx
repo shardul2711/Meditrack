@@ -35,12 +35,25 @@ export const getDatesRange=(startdate, endDate)=>{
 
 export const GetDateRangeToDisplay=()=>{
     const dateList=[];
-    for(let i=0;i<=7;i++)
-    {
+    for(let i=0;i<=7;i++){
         dateList.push({
             date:moment().add(i, 'days').format('DD'), // 25
             day:moment().add(i, 'days').format('dd'), // Tue
             formattedDate:moment().add(i, 'days').format('L') // 12/27/2024 
+
+        })
+    }
+
+    return dateList;
+}
+
+export const GetReverseDateRangeToDisplay=()=>{
+    const dateList=[];
+    for(let i=0;i<=7;i++){
+        dateList.push({
+            date:moment().subtract(i, 'days').format('DD'), // 25
+            day:moment().subtract(i, 'days').format('dd'), // Tue
+            formattedDate:moment().subtract(i, 'days').format('L') // 12/27/2024 
 
         })
     }

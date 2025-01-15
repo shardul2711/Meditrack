@@ -5,6 +5,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../config/FirebaseConfig';
 import { getLocalStorage } from '../../service/Storage';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
 
@@ -40,6 +41,14 @@ export default function TabLayout() {
                 tabBarLabel:'History', 
                 tabBarIcon:({color, size}) => (
                     <FontAwesome name="history" size={size} color={color} />
+                )
+            }}
+        />
+        <Tabs.Screen name='bot'
+            options={{
+                tabBarLabel:'bot', 
+                tabBarIcon:({color, size}) => (
+                    <Ionicons name="chatbox" size={24} color={color} />
                 )
             }}
         />

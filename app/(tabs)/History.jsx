@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Colors from '../../Constant/Colors';
-import { GetDateRangeToDisplay } from '../../service/ConvertDateTime';
+import { GetDateRangeToDisplay, GetReverseDateRangeToDisplay } from '../../service/ConvertDateTime';
 import moment from 'moment';
 import { getLocalStorage } from '../../service/Storage';
 import { collection, getDocs, query, where } from 'firebase/firestore';
@@ -23,13 +23,14 @@ export default function History() {
   }, [])
 
   const GetDateList = () => {
-    const dates = GetDateRangeToDisplay();
+    const dates = GetReverseDateRangeToDisplay();
     // console.warn(dates);
     setDateRange(dates);
   }
 
 
   const GetMedicationList=async(selectedDate) => {
+    
     setLoading(true);
     const user=await getLocalStorage('userDetail');
     setMedList([]);
@@ -94,13 +95,15 @@ export default function History() {
         onRefresh={() => GetMedicationList(selectedDate)}
         refreshing={loading}
         renderItem={({ item, index }) => (
-          <TouchableOpacity onPress={() => router.push({
-            pathname: "/actionModal",
-            params: {
-              ...item,
-              selectedDate: selectedDate
-            }
-          })}>
+          <TouchableOpacity 
+          // onPress={() => router.push({
+          //   pathname: "/actionModal",
+          //   params: {
+          //     ...item,
+          //     selectedDate: selectedDate
+          //   }
+          // })}
+          >
             <MedicationCardItem medicine={item} selectedDate={selectedDate} />
           </TouchableOpacity>
         )}
